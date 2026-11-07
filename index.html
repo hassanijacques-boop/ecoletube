@@ -259,12 +259,17 @@ footer b{color:var(--ink)}
       <div class="step"><b>4. On s'entraîne</b><span>3 exercices écrits sur le même point. Pas 30 : trois, bien faits.</span></div>
       <div class="step"><b>5. On coche</b><span>La case ✓ garde la trace de ce qui est acquis. On y revient 3 jours après.</span></div>
     </div>
+    <div style="padding:0 26px 26px">
+      <div class="callout" style="border-left:4px solid var(--fr);padding:6px 0 6px 14px;color:var(--ink2);font-size:13.5px">
+        <strong style="color:var(--ink)">Ce qui n'est pas ici, et pourquoi.</strong> L'EPS ne s'apprend pas devant un écran : elle se pratique. Les langues vivantes non plus ne se réduisent pas à du vocabulaire — les vidéos servent d'amorçage, le reste se fait en parlant.
+      </div>
+    </div>
   </section>
 </main>
 
 <footer>
   <div class="inner">
-    <div><b>École Tube</b> — bibliothèque de vidéos pour le primaire, classée à la main.<br>Programme de l'école primaire (cycle 2 et cycle 3), d'après les programmes officiels en vigueur.</div>
+    <div><b>École Tube</b> — bibliothèque de vidéos pour le primaire, classée à la main.<br>Programme de l'école primaire (cycle 2 et cycle 3), d'après les programmes officiels en vigueur.<br><span style="font-size:12px">Version 1 — 7 novembre 2026 · 273 liens testés un par un.</span></div>
     <div>Les vidéos restent la propriété de leurs auteurs.<br>Les liens ouvrent YouTube ; aucune donnée n'est collectée.<br>Progression enregistrée uniquement sur cet appareil.</div>
   </div>
 </footer>
@@ -381,7 +386,7 @@ function card(v){
   const el=document.createElement("article");
   el.className="card"+(seen.has(v.i)?" seen":"");
   el.innerHTML=
-    '<div class="thumb"><img loading="lazy" src="https://i.ytimg.com/vi/'+v.i+'/mqdefault.jpg" alt="">'+
+    '<div class="thumb"><span class="ph">▶</span><img loading="lazy" src="https://i.ytimg.com/vi/'+v.i+'/mqdefault.jpg" alt="" onerror="this.style.opacity=0">'+
       '<span class="dur">'+fmt(v.d)+'</span>'+
       '<button class="seenbtn" title="Marquer comme vue">✓</button>'+
       '<div class="play"><span>▶</span></div></div>'+
