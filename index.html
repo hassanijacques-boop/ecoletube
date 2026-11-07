@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>École Tube — toutes les vidéos pour réviser, CP → CM2</title>
+<meta name="description" content="La bibliothèque de vidéos pour réviser le programme de l'école primaire, du CP au CM2. Classée à la main, matière par matière. Zéro algorithme.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Inter:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FBF6EC; --paper2:#F4ECDC; --ink:#16213C; --ink2:#46506B;
+  --line:#E2D6BF; --card:#FFFDF8;
+  --fr:#D9462F; --ma:#23618F; --sc:#31825A; --hi:#9B5320; --ge:#1F7A6C;
+  --em:#65489B; --an:#B93A73; --ar:#C98A12; --nu:#37496B;
+  --shadow:4px 4px 0 var(--ink);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,system-ui,-apple-system,sans-serif;font-size:16px;line-height:1.55;
+  background-image:radial-gradient(#00000008 1px, transparent 1px);background-size:22px 22px}
+img{display:block;max-width:100%}
+a{color:inherit}
+button{font-family:inherit}
+
+/* ---------- TOP BAR ---------- */
+.top{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:18px;padding:12px 22px;
+  background:rgba(251,246,236,.92);backdrop-filter:blur(10px);border-bottom:2px solid var(--ink)}
+.brand{display:flex;align-items:center;gap:10px;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:19px;letter-spacing:-.02em;white-space:nowrap}
+.brand .mark{width:34px;height:34px;border:2px solid var(--ink);border-radius:9px;display:grid;place-items:center;background:var(--ink);color:var(--paper);font-size:17px;box-shadow:2px 2px 0 var(--fr)}
+.brand small{display:block;font-family:Inter,sans-serif;font-weight:500;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2)}
+.search{flex:1;min-width:0;max-width:430px;position:relative}
+.search input{width:100%;padding:10px 14px 10px 38px;border:2px solid var(--ink);border-radius:999px;background:var(--card);
+  font-size:14.5px;color:var(--ink);outline:none;transition:box-shadow .15s}
+.search input:focus{box-shadow:3px 3px 0 var(--ma)}
+.search::before{content:"🔍";position:absolute;left:12px;top:50%;transform:translateY(-52%);font-size:14px;opacity:.65;pointer-events:none}
+.noalgo{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;color:var(--ink2)}
+.noalgo b{color:var(--fr)}
+
+/* ---------- HERO ---------- */
+.hero{padding:56px 22px 34px;max-width:1240px;margin:0 auto;position:relative}
+.kicker{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  background:var(--ink);color:var(--paper);padding:6px 13px;border-radius:999px}
+.hero h1{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(38px,6.4vw,74px);line-height:.98;letter-spacing:-.045em;margin:20px 0 0;font-weight:800;max-width:15ch}
+.hero h1 em{font-style:normal;color:var(--fr);position:relative;display:inline-block;
+  background-image:linear-gradient(180deg,transparent 58%,rgba(242,183,5,.55) 58%,rgba(242,183,5,.55) 88%,transparent 88%)}
+.hero p.lead{font-size:17.5px;max-width:56ch;color:var(--ink2);margin:20px 0 0}
+.hero .hand{font-family:Caveat,cursive;font-size:23px;color:var(--ma);transform:rotate(-2deg);display:inline-block;margin-top:16px}
+.stats{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.stat{background:var(--card);border:2px solid var(--ink);border-radius:14px;padding:10px 16px;box-shadow:3px 3px 0 var(--ink)}
+.stat b{font-family:'Bricolage Grotesque',sans-serif;font-size:24px;letter-spacing:-.03em;display:block;line-height:1}
+.stat span{font-size:11.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink2);font-weight:600}
+
+/* ---------- FILTERS ---------- */
+.filters{position:sticky;top:63px;z-index:50;background:rgba(244,236,220,.96);backdrop-filter:blur(8px);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+.levels,.mats{max-width:1240px;margin:0 auto;padding:0 22px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+.levels::-webkit-scrollbar,.mats::-webkit-scrollbar{display:none}
+.levels{padding-top:10px;padding-bottom:8px}
+.mats{padding-bottom:10px}
+.lvbtn{flex:0 0 auto;border:2px solid var(--ink);background:var(--card);border-radius:11px;padding:7px 16px;font-weight:700;font-size:14.5px;cursor:pointer;
+  box-shadow:2px 2px 0 var(--ink);transition:.12s;display:flex;flex-direction:column;align-items:center;min-width:64px}
+.lvbtn small{font-size:9.5px;font-weight:600;letter-spacing:.06em;color:var(--ink2);text-transform:uppercase}
+.lvbtn:hover{transform:translate(-1px,-1px);box-shadow:3px 3px 0 var(--ink)}
+.lvbtn.on{background:var(--ink);color:var(--paper)}
+.lvbtn.on small{color:#C9CFE0}
+.matbtn{flex:0 0 auto;border:1.5px solid var(--line);background:transparent;border-radius:999px;padding:6px 13px;font-size:13px;font-weight:600;cursor:pointer;color:var(--ink2);
+  display:flex;align-items:center;gap:6px}
+.matbtn .dot{width:8px;height:8px;border-radius:50%}
+.matbtn.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.matbtn.on .dot{box-shadow:0 0 0 2px rgba(255,255,255,.35)}
+
+/* ---------- CONTENT ---------- */
+main{max-width:1240px;margin:0 auto;padding:8px 22px 60px}
+.lvhead{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin:34px 0 6px;flex-wrap:wrap}
+.lvhead h2{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(26px,3.4vw,38px);letter-spacing:-.035em;margin:0}
+.lvhead .sub{color:var(--ink2);font-size:14px;max-width:62ch;margin:4px 0 0}
+.progwrap{min-width:190px}
+.progwrap .t{font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);display:flex;justify-content:space-between;gap:10px}
+.bar{height:9px;border:1.5px solid var(--ink);border-radius:999px;background:var(--card);overflow:hidden;margin-top:5px}
+.bar i{display:block;height:100%;background:var(--sc);width:0;transition:width .3s}
+
+.matsec{margin-top:38px}
+.matsec>header{display:flex;align-items:center;gap:12px;padding-bottom:10px;border-bottom:2.5px solid var(--ink);margin-bottom:6px;flex-wrap:wrap}
+.matsec .ico{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;font-size:19px;border:2px solid var(--ink);color:#fff;box-shadow:2px 2px 0 var(--ink)}
+.matsec h3{font-family:'Bricolage Grotesque',sans-serif;font-size:22px;margin:0;letter-spacing:-.02em}
+.matsec .att{font-size:13.5px;color:var(--ink2);margin:2px 0 0;max-width:70ch}
+.matsec .n{margin-left:auto;font-size:12px;font-weight:700;color:var(--ink2);background:var(--paper2);border:1.5px solid var(--line);padding:4px 10px;border-radius:999px}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:16px;margin-top:16px}
+.card{background:var(--card);border:2px solid var(--ink);border-radius:15px;overflow:hidden;cursor:pointer;display:flex;flex-direction:column;
+  transition:transform .14s,box-shadow .14s;box-shadow:2px 2px 0 rgba(22,33,60,.16)}
+.card:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--ink)}
+.card.seen{opacity:.62}
+.card.seen .thumb::after{content:"VU";position:absolute;inset:0;display:grid;place-items:center;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;
+  font-size:26px;letter-spacing:.2em;color:#fff;background:rgba(22,33,60,.55)}
+.thumb{position:relative;aspect-ratio:16/9;background:var(--paper2);overflow:hidden}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.thumb .ph{position:absolute;inset:0;display:grid;place-items:center;font-size:30px}
+.dur{position:absolute;right:7px;bottom:7px;background:var(--ink);color:var(--paper);font-size:11px;font-weight:700;padding:2px 6px;border-radius:5px;letter-spacing:.02em}
+.play{position:absolute;inset:0;display:grid;place-items:center;opacity:0;transition:.15s;background:linear-gradient(0deg,rgba(22,33,60,.35),rgba(22,33,60,.05))}
+.card:hover .play{opacity:1}
+.play span{width:48px;height:48px;border-radius:50%;background:var(--paper);color:var(--ink);display:grid;place-items:center;font-size:17px;padding-left:4px;border:2px solid var(--ink)}
+.seenbtn{position:absolute;left:7px;top:7px;width:27px;height:27px;border-radius:50%;border:2px solid #fff;background:rgba(22,33,60,.55);color:#fff;font-size:13px;
+  cursor:pointer;display:grid;place-items:center;z-index:3}
+.seenbtn:hover{background:var(--sc);border-color:var(--sc)}
+.card.seen .seenbtn{background:var(--sc);border-color:var(--sc)}
+.body{padding:11px 13px 13px;display:flex;flex-direction:column;gap:5px;flex:1}
+.thm{font-size:10.5px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:var(--ink2)}
+.card h4{font-size:14.5px;line-height:1.32;margin:0;font-weight:600;letter-spacing:-.01em;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.meta{margin-top:auto;display:flex;align-items:center;gap:7px;font-size:11.5px;color:var(--ink2);padding-top:6px}
+.meta .ch{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:60%}
+.meta .lvls{margin-left:auto;display:flex;gap:3px}
+.meta .lvls i{font-style:normal;font-size:9.5px;font-weight:700;border:1px solid var(--line);border-radius:4px;padding:1px 4px;background:var(--paper2)}
+.empty{padding:60px 0;text-align:center;color:var(--ink2)}
+.empty b{display:block;font-family:'Bricolage Grotesque',sans-serif;font-size:22px;color:var(--ink)}
+
+/* ---------- PROGRAMME ---------- */
+.panel{margin:70px 0 0;border:2.5px solid var(--ink);border-radius:20px;background:var(--card);overflow:hidden;box-shadow:6px 6px 0 var(--ink)}
+.panel>header{padding:24px 26px 18px;border-bottom:2px solid var(--ink);background:var(--paper2)}
+.panel>header .kicker{background:var(--fr);color:#fff}
+.panel>header h2{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(24px,3.2vw,34px);margin:12px 0 4px;letter-spacing:-.03em}
+.panel>header p{margin:0;color:var(--ink2);font-size:14.5px;max-width:75ch}
+.progtable{width:100%;border-collapse:collapse;font-size:14px}
+.progtable th{text-align:left;padding:11px 16px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);border-bottom:1.5px solid var(--line);background:var(--paper)}
+.progtable td{padding:13px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+.progtable tr:last-child td{border-bottom:none}
+.progtable td.m{font-weight:700;white-space:nowrap}
+.progtable ul{margin:0;padding-left:16px}
+.progtable li{margin:2px 0}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:999px;background:var(--paper2);border:1px solid var(--line)}
+
+/* ---------- CHAINES ---------- */
+.chans{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:13px;padding:22px 26px 26px}
+.chan{border:2px solid var(--ink);border-radius:13px;padding:13px 15px;background:var(--card);text-decoration:none;transition:.14s;display:block}
+.chan:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
+.chan b{font-family:'Bricolage Grotesque',sans-serif;font-size:16px;display:block;letter-spacing:-.02em}
+.chan span{font-size:12.5px;color:var(--ink2);display:block;margin-top:3px}
+.chan em{font-style:normal;font-size:11px;font-weight:700;color:var(--ma);letter-spacing:.05em;text-transform:uppercase}
+
+/* ---------- METHODE ---------- */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;padding:22px 26px 26px}
+.step{border-left:4px solid var(--ar);padding:4px 0 4px 14px}
+.step b{font-family:'Bricolage Grotesque',sans-serif;font-size:15.5px;display:block;letter-spacing:-.01em}
+.step span{font-size:13.5px;color:var(--ink2)}
+
+/* ---------- MODAL ---------- */
+.modal{position:fixed;inset:0;z-index:100;display:none;place-items:center;padding:18px;background:rgba(16,22,40,.82);backdrop-filter:blur(6px)}
+.modal.open{display:grid}
+.mbox{width:min(920px,100%);background:var(--paper);border:3px solid var(--ink);border-radius:18px;overflow:hidden;box-shadow:8px 8px 0 rgba(0,0,0,.35);max-height:94vh;display:flex;flex-direction:column}
+.mtop{display:flex;align-items:center;gap:12px;padding:11px 15px;border-bottom:2px solid var(--ink);background:var(--paper2)}
+.mtop .t{font-weight:700;font-size:14.5px;line-height:1.25;flex:1;letter-spacing:-.01em}
+.mtop button{border:2px solid var(--ink);background:var(--card);border-radius:8px;width:32px;height:32px;cursor:pointer;font-size:15px;font-weight:700}
+.mtop button:hover{background:var(--ink);color:var(--paper)}
+.video{aspect-ratio:16/9;background:#000}
+.video iframe{width:100%;height:100%;border:0;display:block}
+.mbot{display:flex;align-items:center;gap:12px;padding:11px 15px;flex-wrap:wrap;font-size:13px;color:var(--ink2)}
+.mbot a{font-weight:600;color:var(--ma)}
+.mbot .seen2{margin-left:auto;border:2px solid var(--ink);border-radius:8px;padding:6px 12px;background:var(--card);cursor:pointer;font-weight:700;font-size:12.5px}
+.mbot .seen2.on{background:var(--sc);color:#fff;border-color:var(--sc)}
+
+/* ---------- FOOTER ---------- */
+footer{border-top:2px solid var(--ink);background:var(--paper2);padding:30px 22px;font-size:13px;color:var(--ink2)}
+footer .inner{max-width:1240px;margin:0 auto;display:flex;gap:24px;flex-wrap:wrap;justify-content:space-between}
+footer b{color:var(--ink)}
+
+@media(max-width:760px){
+  .filters{top:57px}
+  .noalgo{display:none}
+  .top{padding:9px 14px;gap:10px}
+  .brand{font-size:15.5px;letter-spacing:-.03em}
+  .brand small{display:none}
+  .brand .mark{width:29px;height:29px;font-size:14px;border-radius:8px}
+  .search input{font-size:13px;padding:8px 10px 8px 30px}
+  .search::before{left:10px;font-size:12px}
+  .hero{padding-top:34px}
+  .grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+  .card h4{font-size:13px}
+  .panel{box-shadow:4px 4px 0 var(--ink);border-radius:14px}
+  .progtable{font-size:12.5px}
+  .progtable td,.progtable th{padding:9px 10px}
+}
+@media print{
+  .top,.filters,.hero .stats,.play,.seenbtn,.modal,footer{display:none!important}
+  body{background:#fff}
+  .card{break-inside:avoid;box-shadow:none;border:1px solid #999}
+  .grid{grid-template-columns:repeat(3,1fr)}
+  a{text-decoration:none}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="brand"><span class="mark">É</span><span>ÉCOLE TUBE<small>CP → CM2 · à la main</small></span></div>
+  <div class="search"><input id="q" type="search" placeholder="Chercher : le son ou, les fractions, la Révolution…" autocomplete="off"></div>
+  <div class="noalgo"><span>Classement <b>100 % humain</b></span> · <span id="seenPct">0 % vu</span></div>
+</header>
+
+<section class="hero">
+  <div class="kicker">📺 Le programme de l'école primaire, vidéo par vidéo</div>
+  <h1>Toutes les vidéos pour réviser. <em>Classées à la main.</em></h1>
+  <p class="lead">Pas de fil de recommandation, pas de Shorts qui défilent, pas de « tu pourrais aussi aimer ». Chaque vidéo répond à <strong>un point précis du programme</strong> — et elle est rangée à sa place, par matière et par niveau.</p>
+  <div class="hand">→ un clic, on regarde, on coche, on passe à la suite.</div>
+  <div class="stats">
+    <div class="stat"><b id="sVid">—</b><span>vidéos vérifiées</span></div>
+    <div class="stat"><b id="sCh">—</b><span>chaînes retenues</span></div>
+    <div class="stat"><b id="sTh">—</b><span>points du programme</span></div>
+    <div class="stat"><b>0</b><span>algorithme</span></div>
+  </div>
+</section>
+
+<div class="filters">
+  <div class="levels" id="levels"></div>
+  <div class="mats" id="mats"></div>
+</div>
+
+<main>
+  <div class="lvhead">
+    <div>
+      <h2 id="lvTitle">CP</h2>
+      <p class="sub" id="lvSub"></p>
+    </div>
+    <div class="progwrap">
+      <div class="t"><span>Vidéos vues</span><span id="progTxt">0 / 0</span></div>
+      <div class="bar"><i id="progBar"></i></div>
+    </div>
+  </div>
+  <div id="list"></div>
+
+  <section class="panel" id="programme">
+    <header>
+      <div class="kicker">📌 Le programme officiel</div>
+      <h2 id="progH">Ce que l'élève doit savoir à la fin du CP</h2>
+      <p id="progP">Les domaines et les attendus, matière par matière. C'est la carte qui permet de savoir <em>où</em> on en est — et quelle vidéo regarder ensuite.</p>
+    </header>
+    <div id="progBody"></div>
+  </section>
+
+  <section class="panel" id="chaines">
+    <header>
+      <div class="kicker">🎬 Les chaînes</div>
+      <h2>Les 12 chaînes qui font le travail</h2>
+      <p>Toutes gratuites, toutes en français. Elles sont citées sur chaque carte : on sait toujours qui parle à l'enfant.</p>
+    </header>
+    <div class="chans" id="chans"></div>
+  </section>
+
+  <section class="panel" id="methode">
+    <header>
+      <div class="kicker">⏱️ La méthode</div>
+      <h2>15 minutes par jour, et ça suffit</h2>
+      <p>Une vidéo ne remplace pas un exercice — elle sert à <strong>comprendre</strong> puis à <strong>refaire</strong>. Voilà l'ordre qui marche, en classe comme à la maison.</p>
+    </header>
+    <div class="steps">
+      <div class="step"><b>1. On regarde en entier</b><span>Une seule fois, sans pause. On ne note rien.</span></div>
+      <div class="step"><b>2. On refait à l'oral</b><span>« Explique-moi avec tes mots. » Si l'enfant raconte, il a compris.</span></div>
+      <div class="step"><b>3. On revoit le passage</b><span>Retour arrière sur le moment clé, puis on refait l'exemple donné.</span></div>
+      <div class="step"><b>4. On s'entraîne</b><span>3 exercices écrits sur le même point. Pas 30 : trois, bien faits.</span></div>
+      <div class="step"><b>5. On coche</b><span>La case ✓ garde la trace de ce qui est acquis. On y revient 3 jours après.</span></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="inner">
+    <div><b>École Tube</b> — bibliothèque de vidéos pour le primaire, classée à la main.<br>Programme de l'école primaire (cycle 2 et cycle 3), d'après les programmes officiels en vigueur.</div>
+    <div>Les vidéos restent la propriété de leurs auteurs.<br>Les liens ouvrent YouTube ; aucune donnée n'est collectée.<br>Progression enregistrée uniquement sur cet appareil.</div>
+  </div>
+</footer>
+
+<div class="modal" id="modal">
+  <div class="mbox">
+    <div class="mtop"><div class="t" id="mTitle"></div><button id="mClose" aria-label="Fermer">✕</button></div>
+    <div class="video"><iframe id="mFrame" allow="accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+    <div class="mbot">
+      <span id="mMeta"></span>
+      <a id="mLink" href="#" target="_blank" rel="noopener">Ouvrir sur YouTube ↗</a>
+      <button class="seen2" id="mSeen">✓ Marquer comme vue</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const VIDEOS = [{"i":"sUggVDU4S88","t":"Anglais - Les couleurs","c":"Mon école","d":71,"m":"Anglais","th":"Les couleurs","lv":["CP"]},{"i":"uYHX5ZORxy4","t":"Anglais - Se présenter (nom, âge)","c":"Mon école","d":64,"m":"Anglais","th":"Se présenter","lv":["CP"]},{"i":"Zbrz_WL9H6A","t":"Les couleurs primaires et secondaires","c":"Eveiller mon enfant","d":155,"m":"Arts","th":"Arts plastiques","lv":["CP","CE1"]},{"i":"ZcIkDKgP72A","t":"Soigner son langage et être poli - politesse CP CE1","c":"Maître Lucas","d":399,"m":"EMC","th":"Vivre ensemble","lv":["CP","CE1"]},{"i":"y_UshMDcnV4","t":"Les émotions","c":"Maître Lucas","d":371,"m":"EMC","th":"Vivre ensemble","lv":["CP","CE1"]},{"i":"pLDZ7dD2sLc","t":"C'est quoi vivre ensemble ?","c":"1 jour, 1 question","d":111,"m":"EMC","th":"Vivre ensemble","lv":["CP","CE1"]},{"i":"IpWESe0ghEI","t":"Nom propre et nom commun","c":"Maître Lucas","d":243,"m":"Français","th":"Grammaire","lv":["CP","CE1"]},{"i":"4h_vLk1MhO4","t":"Le nom commun et le nom propre","c":"Eveiller mon enfant","d":364,"m":"Français","th":"Grammaire","lv":["CP"]},{"i":"KoR3qJK_wEc","t":"Qu'est-ce qu'une phrase","c":"Maître Lucas","d":249,"m":"Français","th":"Grammaire","lv":["CP","CE1"]},{"i":"6v24bFq0bQU","t":"Distinguer la phrase et la ligne","c":"Maître Lucas","d":246,"m":"Français","th":"Grammaire","lv":["CP","CE1"]},{"i":"CBGA58qRawU","t":"Le verbe","c":"Maître Lucas","d":263,"m":"Français","th":"Grammaire","lv":["CP","CE1"]},{"i":"h7KGBhjU6oY","t":"Identifier le verbe - leçon motoufo.fr","c":"Mon école","d":110,"m":"Français","th":"Grammaire","lv":["CP"]},{"i":"liuYTks6rCs","t":"Le singulier et le pluriel","c":"Maître Lucas","d":493,"m":"Français","th":"Grammaire","lv":["CP","CE1"]},{"i":"DJKmKgVg3Yo","t":"Le genre des noms au pluriel","c":"Maître Lucas","d":230,"m":"Français","th":"Grammaire","lv":["CP","CE1","CE2"]},{"i":"ZtfSvJcgNqU","t":"Définitions d'une lettre, d'un son et d'une syllabe","c":"Maître Lucas","d":507,"m":"Français","th":"Les sons et les lettres","lv":["CP","CE1"]},{"i":"i68Pxw-w9a0","t":"Lire les syllabes avec le graphème OU","c":"Apprendre avec Bobo","d":214,"m":"Français","th":"Les sons et les lettres","lv":["CP","CE1"]},{"i":"N8eUs4aAWNc","t":"Apprendre à lire : les syllabes","c":"Eveiller mon enfant","d":567,"m":"Français","th":"Les sons et les lettres","lv":["CP"]},{"i":"0GgUOVaoPBk","t":"Tous les sons du CP","c":"Eveiller mon enfant","d":2197,"m":"Français","th":"Les sons et les lettres","lv":["CP"]},{"i":"wkig_MZAr0I","t":"Les consonnes et les voyelles","c":"Maître Lucas","d":255,"m":"Français","th":"Les sons et les lettres","lv":["CP","CE1"]},{"i":"CqDbmlNr7lc","t":"Le chant des Alphas (révisions)","c":"Ma p'tite école","d":539,"m":"Français","th":"Les sons et les lettres","lv":["CP"]},{"i":"LLqXXl9g01w","t":"En finir avec la confusion b/d","c":"L'apprenti lecteur","d":395,"m":"Français","th":"Les sons et les lettres","lv":["CP"]},{"i":"mqsUYRFBr8c","t":"Les lettres muettes","c":"Eveiller mon enfant","d":359,"m":"Français","th":"Les sons et les lettres","lv":["CP"]},{"i":"qrxIsxl6sWw","t":"Le conte « La planète des Alphas »","c":"Editions Récréalire ( ALPHAS - RIKIPOTES - MIAO)","d":1194,"m":"Français","th":"Les sons et les lettres","lv":["CP"]},{"i":"PTEi5rfqdjQ","t":"Apprendre à écrire en cursive","c":"Maître Lucas","d":335,"m":"Français","th":"Écriture","lv":["CP","CE1"]},{"i":"DR_66o6DOeI","t":"Les lettres et les mots","c":"Maître Lucas","d":305,"m":"Français","th":"Écriture","lv":["CP"]},{"i":"Sh4M1Mz4DRc","t":"la soustraction- cp","c":"A nous les maths","d":172,"m":"Maths","th":"Calcul","lv":["CP"]},{"i":"6-4V6VHoO4A","t":"Les additions en ligne et additions posées sans retenue","c":"Maître Lucas","d":377,"m":"Maths","th":"Calcul","lv":["CP","CE1"]},{"i":"HkcLxx_E7XE","t":"Figures géométriques CE1 - Carré, rectangle, triangle, cercle","c":"Maître Lucas","d":360,"m":"Maths","th":"Géométrie","lv":["CP","CE1"]},{"i":"d-T5tmv_87g","t":"Les formes géométriques pour les enfants - Vocabulaire infantile","c":"Smile and Learn - Français","d":221,"m":"Maths","th":"Géométrie","lv":["CP"]},{"i":"KpldM-7CUhU","t":"Découvrir les solides","c":"Maître Lucas","d":431,"m":"Maths","th":"Géométrie","lv":["CP"]},{"i":"7vd0lD95W-M","t":"Maths CP - les solides (cube, pavé, sphère...)","c":"WizAide","d":368,"m":"Maths","th":"Géométrie","lv":["CP"]},{"i":"Sbschx4b6cM","t":"Les positions (devant, derrière, etc.)","c":"Maître Lucas","d":375,"m":"Maths","th":"Géométrie","lv":["CP","CE1"]},{"i":"HVt9pTOTh_4","t":"Plan de la classe CP - Se repérer dans l'espace et le représenter","c":"Maître Lucas","d":355,"m":"Maths","th":"Géométrie","lv":["CP","CE1"]},{"i":"HqY-BzXEebM","t":"Mesurer avec une règle (cm, mm)","c":"Maître Lucas","d":260,"m":"Maths","th":"Mesures","lv":["CP","CE1"]},{"i":"uywS6_sINuo","t":"Utiliser la règle","c":"Maître Lucas","d":194,"m":"Maths","th":"Mesures","lv":["CP","CE1"]},{"i":"EsfNsZ5DK7s","t":"Reconnaître et manipuler les euros","c":"Maître Lucas","d":413,"m":"Maths","th":"Mesures","lv":["CP","CE1"]},{"i":"8B8stwk7Cqs","t":"La monnaie","c":"Eveiller mon enfant","d":227,"m":"Maths","th":"Mesures","lv":["CP"]},{"i":"20QU8x3ElAs","t":"Lire les heures : les minutes","c":"Maître Lucas","d":364,"m":"Maths","th":"Mesures","lv":["CP","CE1","CE2"]},{"i":"OJBlk9J8gd4","t":"Lire et compter les nombres jusqu'à 10","c":"Maître Lucas","d":632,"m":"Maths","th":"Numération","lv":["CP"]},{"i":"r8fErb2iK-o","t":"Nombres en lettres jusqu'à 10","c":"Maître Lucas","d":588,"m":"Maths","th":"Numération","lv":["CP"]},{"i":"x7OTprJ7k0s","t":"Les nombres jusqu'à 20","c":"Maître Lucas","d":620,"m":"Maths","th":"Numération","lv":["CP"]},{"i":"WdhdA7YctPo","t":"Nombres en lettres jusqu'à 20","c":"Maître Lucas","d":427,"m":"Maths","th":"Numération","lv":["CP","CE1"]},{"i":"gIh-H4iu9hE","t":"Comparer et ranger les nombres jusqu'à 99","c":"Maître Lucas","d":592,"m":"Maths","th":"Numération","lv":["CP","CE1"]},{"i":"tw0fgxPKS2Q","t":"Lire les nombres de 70 à 99","c":"Maître Lucas","d":769,"m":"Maths","th":"Numération","lv":["CP","CE1"]},{"i":"kVxVES1wM4M","t":"Les unités et les dizaines","c":"Maître Lucas","d":449,"m":"Maths","th":"Numération","lv":["CP","CE1"]},{"i":"ZO--oenG3dk","t":"Additionner et soustraire des dizaines entières","c":"Maître Lucas","d":269,"m":"Maths","th":"Numération","lv":["CP","CE1"]},{"i":"Bq81VJ_0Ksc","t":"Comparer et ranger les nombres jusqu'à 19","c":"Maître Lucas","d":443,"m":"Maths","th":"Numération","lv":["CP"]},{"i":"fyY0jwreFC0","t":"Comparer et ranger les nombres jusqu'à 10","c":"Maître Lucas","d":415,"m":"Maths","th":"Numération","lv":["CP"]},{"i":"q9rVkkgCGLc","t":"Maths CP - Le tableau à double entrée (lecture et utilisation)","c":"WizAide","d":386,"m":"Maths","th":"Organisation des données","lv":["CP"]},{"i":"ErNNhtFHoJA","t":"Les différents types de paysages","c":"Maître Lucas","d":283,"m":"Questionner le monde","th":"L'espace","lv":["CP","CE1","CE2"]},{"i":"WmK2CHR31nc","t":"Les 5 sens","c":"Maître Lucas","d":315,"m":"Questionner le monde","th":"La matière","lv":["CP","CE1"]},{"i":"B-TiKKj3O1A","t":"Les cinq sens","c":"Smile and Learn - Français","d":193,"m":"Questionner le monde","th":"La matière","lv":["CP"]},{"i":"un7vK3ARZTs","t":"Les dangers de l'électricité","c":"Maître Lucas","d":376,"m":"Questionner le monde","th":"La matière","lv":["CP","CE1","CE2"]},{"i":"4jg3rSsH4jo","t":"Électricité : conducteurs et isolants","c":"Maître Lucas","d":345,"m":"Questionner le monde","th":"La matière","lv":["CP","CE1","CE2"]},{"i":"8FiTNquzj54","t":"Les jours de la semaine","c":"Maître Lucas","d":443,"m":"Questionner le monde","th":"Le temps","lv":["CP","CE1"]},{"i":"_xGnCXvW8mY","t":"Écrire les jours de la semaine","c":"Les petites têtes","d":368,"m":"Questionner le monde","th":"Le temps","lv":["CP","CE1","CE2"]},{"i":"BV1zlrQ9HT0","t":"Apprendre les 12 mois de l'année","c":"Les petites têtes","d":200,"m":"Questionner le monde","th":"Le temps","lv":["CP"]},{"i":"W7kfkC5Ru6Y","t":"Les saisons","c":"Maître Lucas","d":347,"m":"Questionner le monde","th":"Le temps","lv":["CP","CE1"]},{"i":"wyQKbb7pg08","t":"Le jour et la nuit","c":"Maître Lucas","d":235,"m":"Questionner le monde","th":"Le temps","lv":["CP","CE1"]},{"i":"0hYCCSm3qDs","t":"L'école d'autrefois","c":"Maître Lucas","d":349,"m":"Questionner le monde","th":"Le temps","lv":["CP","CE1"]},{"i":"CHnqX-rVorg","t":"Vivant et non vivant","c":"Maître Lucas","d":231,"m":"Questionner le monde","th":"Le vivant","lv":["CP","CE1","CE2"]},{"i":"gRpfi3B1dy4","t":"Les animaux (vocabulaire)","c":"Smile and Learn - Français","d":665,"m":"Questionner le monde","th":"Le vivant","lv":["CP"]},{"i":"MO-T-XOWci8","t":"La germination et la vie des plantes","c":"Maître Lucas","d":301,"m":"Questionner le monde","th":"Le vivant","lv":["CP","CE1","CE2"]},{"i":"7HDujJ35Xao","t":"Le corps humain (vocabulaire)","c":"Eveiller mon enfant","d":224,"m":"Questionner le monde","th":"Le vivant","lv":["CP"]},{"i":"VZJZXqCTx8M","t":"L'hygiène du corps","c":"Maître Lucas","d":284,"m":"Questionner le monde","th":"Le vivant","lv":["CP","CE1","CE2"]},{"i":"PysS4PzQTUg","t":"Les dents","c":"Maître Lucas","d":420,"m":"Questionner le monde","th":"Le vivant","lv":["CP","CE1","CE2"]},{"i":"qlZ6s4VmloA","t":"Les régimes alimentaires","c":"Maître Lucas","d":245,"m":"Questionner le monde","th":"Le vivant","lv":["CP","CE1","CE2"]},{"i":"LDnlRA9_DzA","t":"Les familles d'aliments","c":"Maître Lucas","d":250,"m":"Questionner le monde","th":"Le vivant","lv":["CP","CE1","CE2"]},{"i":"tn3jxB03Jys","t":"Les couleurs en anglais","c":"Inglés para niños con Mr Pea","d":100,"m":"Anglais","th":"Les couleurs","lv":["CE1"]},{"i":"N8lDK21eNKU","t":"Les jours de la semaine (chanson)","c":"La Montagne secrète","d":176,"m":"Anglais","th":"Les jours","lv":["CE1","CE2"]},{"i":"fB3Vl6QfquE","t":"Le consentement et le respect du corps CP - Cycle 2 et 3","c":"Maître Lucas","d":574,"m":"EMC","th":"Vivre ensemble","lv":["CE1","CE2","CM1","CM2"]},{"i":"luyObngrtJg","t":"La conjugaison des verbes en -er au présent","c":"Maître Lucas","d":585,"m":"Français","th":"Conjugaison","lv":["CE1","CE2"]},{"i":"_VxkR_VGrzw","t":"Le présent des verbes en -er","c":"Mon école","d":103,"m":"Français","th":"Conjugaison","lv":["CE1"]},{"i":"Zv23MjoqAOk","t":"Les accents de la lettre E","c":"Mon école","d":118,"m":"Français","th":"Orthographe","lv":["CE1"]},{"i":"CT3ThDEBPgg","t":"Les mots de la même famille - Les familles de mots (ép. 1/5)","c":"Réseau Canopé","d":146,"m":"Français","th":"Vocabulaire","lv":["CE1","CE2"]},{"i":"fKExlQdgsqQ","t":"Les mots de la même famille ce1 ce2","c":"Maître Lucas","d":232,"m":"Français","th":"Vocabulaire","lv":["CE1","CE2"]},{"i":"z97YBO49dL0","t":"Le sens de la multiplication","c":"Maître Lucas","d":250,"m":"Maths","th":"Calcul","lv":["CE1","CE2"]},{"i":"YLnEHg9umr4","t":"Débuter la multiplication","c":"Maître Lucas","d":237,"m":"Maths","th":"Calcul","lv":["CE1","CE2"]},{"i":"o7XIWn-rx9k","t":"Les additions posées avec retenue","c":"Maître Lucas","d":383,"m":"Maths","th":"Calcul","lv":["CE1","CE2"]},{"i":"hnImDZeVK_E","t":"Calcul mental : le générateur de calculs","c":"Maître Lucas","d":281,"m":"Maths","th":"Calcul","lv":["CE1","CE2","CM1","CM2"]},{"i":"jK_HKdDkLvM","t":"Savoir lire l'heure","c":"Maître Lucas","d":1770,"m":"Maths","th":"Mesures","lv":["CE1","CE2","CM1"]},{"i":"VI4DUHs3JDE","t":"Comparer et ranger les nombres jusqu'à 999","c":"Maître Lucas","d":290,"m":"Maths","th":"Numération","lv":["CE1","CE2"]},{"i":"4JK9F6b25U4","t":"Les jours de la semaine","c":"Inglés para niños con Mr Pea","d":76,"m":"Anglais","th":"Les jours","lv":["CE2","CM1","CM2"]},{"i":"ZziDiJ0eI48","t":"Passé composé : Verbe en er premier groupe","c":"Maître Lucas","d":334,"m":"Français","th":"Conjugaison","lv":["CE2"]},{"i":"0hadpvyN0PY","t":"Passé composé des verbes être et avoir CE2 - Cycle 2 et 3","c":"Maître Lucas","d":436,"m":"Français","th":"Conjugaison","lv":["CE2","CM1"]},{"i":"HgclV6rrCeo","t":"La phrase interrogative","c":"jerevise","d":181,"m":"Français","th":"Grammaire","lv":["CE2"]},{"i":"IUxs-B3wTuI","t":"La phrase : sujet, verbe et complément","c":"Maître Lucas","d":332,"m":"Français","th":"Grammaire","lv":["CE2","CM1"]},{"i":"5F-oqTRKT_0","t":"Le pluriel des noms CE2 - Cycle 2 et 3","c":"Maître Lucas","d":410,"m":"Français","th":"Orthographe","lv":["CE2","CM1"]},{"i":"U1U-8nlBdvc","t":"Le schéma narratif","c":"Maître Lucas","d":226,"m":"Français","th":"Rédaction","lv":["CE2","CM1"]},{"i":"-eLzfCYJZ2E","t":"Écrire un résumé","c":"Maître Lucas","d":250,"m":"Français","th":"Rédaction","lv":["CE2","CM1"]},{"i":"Rgq_HQ49rAU","t":"Comprendre un article de dictionnaire","c":"Maître Lucas","d":251,"m":"Français","th":"Vocabulaire","lv":["CE2","CM1","CM2"]},{"i":"LiOrLxd0JPM","t":"Les régions de France métropolitaine et leurs chefs-lieux","c":"Eveiller mon enfant","d":278,"m":"Géographie","th":"Mon espace proche","lv":["CE2"]},{"i":"ThTYsi3fgTA","t":"Se déplacer sur un plan ou une carte","c":"Maître Lucas","d":460,"m":"Géographie","th":"Se repérer","lv":["CE2","CM1","CM2"]},{"i":"vxD_G8_WMVE","t":"La préhistoire","c":"Quelle Histoire","d":338,"m":"Histoire","th":"La préhistoire","lv":["CE2"]},{"i":"Hp24ZzzCKrw","t":"Le 11 Novembre : pourquoi le fête-t-on ?","c":"La Petite Étincelle","d":288,"m":"Histoire","th":"Le XXe siècle","lv":["CE2","CM1","CM2"]},{"i":"IWcz-se9Pj0","t":"Les tables de multiplication","c":"Maître Lucas","d":458,"m":"Maths","th":"Calcul","lv":["CE2","CM1","CM2"]},{"i":"lPjwG4NPHOY","t":"Droites perpendiculaires et parallèles","c":"Maître Lucas","d":308,"m":"Maths","th":"Géométrie","lv":["CE2","CM1"]},{"i":"qpNKsGeQpBM","t":"Les milliers : Les nombres jusqu'à 9999","c":"Maître Lucas","d":514,"m":"Maths","th":"Numération","lv":["CE2","CM1"]},{"i":"c5sPRL0YKUw","t":"Le recyclage et le tri des déchets","c":"Maître Lucas","d":424,"m":"Sciences","th":"Environnement","lv":["CE2","CM1","CM2"]},{"i":"fW8bwgRDxSY","t":"Les différents états de l'eau","c":"Maître Lucas","d":669,"m":"Sciences","th":"La matière","lv":["CE2","CM1"]},{"i":"e6iBe1697Vk","t":"Anglais - Nombres de 1 à 20","c":"Mon école","d":122,"m":"Anglais","th":"Les nombres","lv":["CM1"]},{"i":"mCStguFa8Sk","t":"Anglais - Nombres de 1 à 10","c":"Mon école","d":102,"m":"Anglais","th":"Les nombres","lv":["CM1"]},{"i":"dYcv-qxeAdc","t":"Saluer et se présenter","c":"Inglés para niños con Mr Pea","d":118,"m":"Anglais","th":"Se présenter","lv":["CM1"]},{"i":"nEUbscLU65w","t":"L'art moderne","c":"Maître Lucas","d":511,"m":"Arts","th":"Arts plastiques","lv":["CM1","CM2"]},{"i":"vFFvBLG31PY","t":"C'est quoi les peintures rupestres ?","c":"1 jour, 1 question","d":102,"m":"Arts","th":"Arts plastiques","lv":["CM1","CM2"]},{"i":"RYhsYYaIdyU","t":"Vincent Van Gogh","c":"Quelle Histoire","d":336,"m":"Arts","th":"Histoire des arts","lv":["CM1","CM2"]},{"i":"uNmiOx3Mefg","t":"Pablo Picasso","c":"Quelle Histoire","d":334,"m":"Arts","th":"Histoire des arts","lv":["CM1","CM2"]},{"i":"xmNCzLxasdA","t":"C'est quoi le Louvre ?","c":"1 jour, 1 question","d":102,"m":"Arts","th":"Histoire des arts","lv":["CM1","CM2"]},{"i":"gbuMRI602XI","t":"Les instruments à corde","c":"Smile and Learn - Français","d":222,"m":"Arts","th":"Musique","lv":["CM1","CM2"]},{"i":"nMX0NbKCWmg","t":"Les symboles de la République","c":"Maître Lucas","d":327,"m":"EMC","th":"La République","lv":["CM1","CM2"]},{"i":"8CRN8arH9xI","t":"Les symboles de la France","c":"Eveiller mon enfant","d":323,"m":"EMC","th":"La République","lv":["CM1"]},{"i":"nf3xplIYHk0","t":"Lutter contre le harcèlement scolaire CP - Cycle 2 et 3","c":"Maître Lucas","d":321,"m":"EMC","th":"Vivre ensemble","lv":["CM1","CM2"]},{"i":"_jNAhJPioOg","t":"C'est quoi la solidarité ?","c":"1 jour, 1 question","d":102,"m":"EMC","th":"Vivre ensemble","lv":["CM1","CM2"]},{"i":"Lb1ASbEMHUM","t":"Egalité entre les filles et les garçons CP - Cycle 2 et 3","c":"Maître Lucas","d":398,"m":"EMC","th":"Égalité","lv":["CM1","CM2"]},{"i":"KmWZZ1V0UV0","t":"Le présent des verbes des 1er et 2e groupes","c":"Maître Lucas","d":486,"m":"Français","th":"Conjugaison","lv":["CM1","CM2"]},{"i":"cPgLhjON8Pg","t":"Le présent du 3e groupe, être et avoir","c":"Maître Lucas","d":405,"m":"Français","th":"Conjugaison","lv":["CM1","CM2"]},{"i":"JYtrRNQLDWk","t":"Dictée : l'imparfait","c":"Maître Lucas","d":374,"m":"Français","th":"Conjugaison","lv":["CM1","CM2"]},{"i":"4KLHzoPl7dE","t":"L'imparfait des verbes des 1er et 2e groupes","c":"Maître Lucas","d":492,"m":"Français","th":"Conjugaison","lv":["CM1","CM2"]},{"i":"cSYxB8LvCDI","t":"Le futur des verbes des 1er et 2e groupes","c":"Maître Lucas","d":323,"m":"Français","th":"Conjugaison","lv":["CM1","CM2"]},{"i":"IrQBW_XJQ9c","t":"Le passé simple des 1er et 2e groupes","c":"Maître Lucas","d":431,"m":"Français","th":"Conjugaison","lv":["CM1","CM2"]},{"i":"-Bjvk8rM5G4","t":"Le passé simple du 3e groupe","c":"Maître Lucas","d":302,"m":"Français","th":"Conjugaison","lv":["CM1","CM2"]},{"i":"73wgXwkfFMs","t":"Le plus-que-parfait","c":"Maître Lucas","d":305,"m":"Français","th":"Conjugaison","lv":["CM1","CM2"]},{"i":"R0URG_gzkkg","t":"Révisions : le sujet et le verbe","c":"Maître Lucas","d":321,"m":"Français","th":"Grammaire","lv":["CM1","CM2"]},{"i":"xKPhd8lMZvY","t":"Le groupe nominal","c":"Maître Lucas","d":316,"m":"Français","th":"Grammaire","lv":["CM1","CM2"]},{"i":"zyszN5re2ek","t":"Le groupe nominal (révision)","c":"jerevise","d":253,"m":"Français","th":"Grammaire","lv":["CM1"]},{"i":"sdBR0imeOSY","t":"Les compléments circonstanciels","c":"Maître Lucas","d":393,"m":"Français","th":"Grammaire","lv":["CM1","CM2"]},{"i":"pfTv4oUtOHc","t":"Enrichir ses phrases avec les compléments circonstanciels","c":"Maître Lucas","d":320,"m":"Français","th":"Grammaire","lv":["CM1","CM2"]},{"i":"jJ0ZsRqluCU","t":"L'adjectif qualificatif : épithète et attribut","c":"Maître Lucas","d":371,"m":"Français","th":"Grammaire","lv":["CM1","CM2"]},{"i":"J9ujn7lPD6I","t":"Reconnaître la fonction attribut du sujet","c":"nicolas RENAUD","d":144,"m":"Français","th":"Grammaire","lv":["CM1"]},{"i":"qUQcxi9qly4","t":"Le complément du nom","c":"Maître Lucas","d":249,"m":"Français","th":"Grammaire","lv":["CM1","CM2"]},{"i":"eYBp480ICug","t":"Reconnaître le complément du nom","c":"nicolas RENAUD","d":141,"m":"Français","th":"Grammaire","lv":["CM1"]},{"i":"30jTpBaBI_k","t":"Les pronoms personnels","c":"Maître Lucas","d":504,"m":"Français","th":"Grammaire","lv":["CM1","CM2"]},{"i":"u1zYkEmd3t8","t":"Types et formes de phrases","c":"Maître Lucas","d":501,"m":"Français","th":"Grammaire","lv":["CM1","CM2"]},{"i":"rq4UuxTmink","t":"Lire et comprendre un texte descriptif","c":"Maître Lucas","d":323,"m":"Français","th":"Lecture","lv":["CM1","CM2"]},{"i":"EXCPU9Ohfj8","t":"Lire et comprendre un texte narratif","c":"Maître Lucas","d":411,"m":"Français","th":"Lecture","lv":["CM1","CM2"]},{"i":"GrG51fw2TEU","t":"Lire et comprendre un texte explicatif","c":"Maître Lucas","d":336,"m":"Français","th":"Lecture","lv":["CM1","CM2"]},{"i":"nrVPeyiMi3g","t":"Se faire un film de l'histoire","c":"Maître Lucas","d":411,"m":"Français","th":"Lecture","lv":["CM1","CM2"]},{"i":"dAUjRnc3D6M","t":"Lire à voix haute","c":"Maître Lucas","d":454,"m":"Français","th":"Lecture","lv":["CM1","CM2"]},{"i":"KKUD6zLNSKU","t":"Lire avec la bonne intonation","c":"Maître Lucas","d":339,"m":"Français","th":"Lecture","lv":["CM1","CM2"]},{"i":"HK79ka4Ezbw","t":"Dictée : l'accord sujet-verbe","c":"Maître Lucas","d":360,"m":"Français","th":"Orthographe","lv":["CM1","CM2"]},{"i":"G_VuvieosjU","t":"L'accord sujet-verbe","c":"Mon école","d":86,"m":"Français","th":"Orthographe","lv":["CM1"]},{"i":"iq_NpmADtr4","t":"Les homophones grammaticaux","c":"Maître Lucas","d":575,"m":"Français","th":"Orthographe","lv":["CM1","CM2"]},{"i":"01IUUYinZ1c","t":"Les homophones lexicaux","c":"Maître Lucas","d":484,"m":"Français","th":"Orthographe","lv":["CM1","CM2"]},{"i":"dqAYuX2upHA","t":"L'accord du participe passé avec être et avoir","c":"Maître Lucas","d":477,"m":"Français","th":"Orthographe","lv":["CM1","CM2"]},{"i":"wVAJZSfFTcg","t":"L'accord en genre et en nombre dans le groupe nominal","c":"Maître Lucas","d":270,"m":"Français","th":"Orthographe","lv":["CM1","CM2"]},{"i":"99UkcUol00E","t":"Écrire un conte merveilleux","c":"Maître Lucas","d":578,"m":"Français","th":"Rédaction","lv":["CM1","CM2"]},{"i":"nKKtkkVSkCQ","t":"Écrire un acrostiche","c":"Maître Lucas","d":243,"m":"Français","th":"Rédaction","lv":["CM1","CM2"]},{"i":"PJ_7yz-00no","t":"Écrire un dialogue","c":"Yannick Sayer","d":449,"m":"Français","th":"Rédaction","lv":["CM1","CM2"]},{"i":"0nOezv7pbIo","t":"Les synonymes","c":"Maître Lucas","d":191,"m":"Français","th":"Vocabulaire","lv":["CM1","CM2"]},{"i":"suvnfmghg8U","t":"Les niveaux de langue","c":"Maître Lucas","d":349,"m":"Français","th":"Vocabulaire","lv":["CM1","CM2"]},{"i":"ST10LLLDvkc","t":"Découvrir les lieux où j'habite","c":"Maître Lucas","d":464,"m":"Géographie","th":"Habiter","lv":["CM1","CM2"]},{"i":"jdVMQlj0V3A","t":"Les continents et les océans","c":"Eveiller mon enfant","d":399,"m":"Géographie","th":"La planète","lv":["CM1"]},{"i":"v305uPu-zWw","t":"Les lignes imaginaires","c":"Lumni","d":304,"m":"Géographie","th":"La planète","lv":["CM1"]},{"i":"nj-gJZfZ3ME","t":"Se déplacer en France","c":"Maître Lucas","d":619,"m":"Géographie","th":"Le monde","lv":["CM1","CM2"]},{"i":"b7Jx4m610GY","t":"Communiquer d'un bout à l'autre du monde grâce à internet","c":"Maître Lucas","d":593,"m":"Géographie","th":"Le monde","lv":["CM1","CM2"]},{"i":"uxITuUaJe-A","t":"Les risques naturels","c":"Maître Lucas","d":262,"m":"Géographie","th":"Risques","lv":["CM1","CM2"]},{"i":"fopbhtunmpM","t":"Les Romains et les Gaulois","c":"Maître Lucas","d":412,"m":"Histoire","th":"L'Antiquité","lv":["CM1","CM2"]},{"i":"iJwnr4pSZ3g","t":"Les Gaulois","c":"Quelle Histoire","d":399,"m":"Histoire","th":"L'Antiquité","lv":["CM1"]},{"i":"i143lqjMr6Y","t":"Les Romains","c":"Quelle Histoire","d":415,"m":"Histoire","th":"L'Antiquité","lv":["CM1"]},{"i":"IvWBXgBDM_o","t":"François 1er, protecteur des arts","c":"Maître Lucas","d":409,"m":"Histoire","th":"La Renaissance","lv":["CM1","CM2"]},{"i":"DffHiTe5vEw","t":"Le temps de la République","c":"Maître Lucas","d":493,"m":"Histoire","th":"La République","lv":["CM1","CM2"]},{"i":"D8fel30lK78","t":"La Révolution française","c":"Maître Lucas","d":534,"m":"Histoire","th":"La Révolution","lv":["CM1","CM2"]},{"i":"1yqb3KVZgS4","t":"Le Moyen Âge, c'est quoi ?","c":"Lumni","d":312,"m":"Histoire","th":"Le Moyen Âge","lv":["CM1"]},{"i":"Lxb2-yTMZro","t":"Le Moyen Âge pour les enfants","c":"Smile and Learn - Français","d":261,"m":"Histoire","th":"Le Moyen Âge","lv":["CM1"]},{"i":"xDYTrtPfXrU","t":"L'assaut des châteaux forts","c":"Lumni","d":212,"m":"Histoire","th":"Le Moyen Âge","lv":["CM1"]},{"i":"T2cULYcA8es","t":"Les châteaux forts","c":"C'est pas sorcier","d":1531,"m":"Histoire","th":"Le Moyen Âge","lv":["CM1"]},{"i":"-djkZCRscxE","t":"Clovis et Charlemagne","c":"Maître Lucas","d":475,"m":"Histoire","th":"Le Moyen Âge","lv":["CM1","CM2"]},{"i":"fMmxPm7eTjc","t":"Dans la classe de... Charlemagne I Podcast","c":"Quelle Histoire","d":823,"m":"Histoire","th":"Le Moyen Âge","lv":["CM1"]},{"i":"6UDWVNKzq4c","t":"Napoléon Bonaparte, du général à l'empereur","c":"Maître Lucas","d":437,"m":"Histoire","th":"Le XIXe siècle","lv":["CM1","CM2"]},{"i":"M6SMA7H2fEY","t":"L'âge industriel","c":"Maître Lucas","d":534,"m":"Histoire","th":"Le XIXe siècle","lv":["CM1","CM2"]},{"i":"JHgwlJSxBuw","t":"La construction européenne","c":"Maître Lucas","d":378,"m":"Histoire","th":"Le XXe siècle","lv":["CM1","CM2"]},{"i":"KO5h5J1myzc","t":"Louis XIV (le Roi-Soleil)","c":"Maître Lucas","d":372,"m":"Histoire","th":"Les Temps modernes","lv":["CM1","CM2"]},{"i":"IQFKMnvwFPM","t":"Division posée CM2 - CM1 (par un nombre à 2 chiffres avec reste)","c":"Maître Lucas","d":425,"m":"Maths","th":"Calcul","lv":["CM1","CM2"]},{"i":"i0Q6aAAZe0U","t":"Poser une division à un chiffre au diviseur","c":"Maître Lucas","d":426,"m":"Maths","th":"Calcul","lv":["CM1","CM2"]},{"i":"PDpsbdbmn_Q","t":"La proportionnalité CM2 - Découvrir la proportionnalité","c":"Maître Lucas","d":556,"m":"Maths","th":"Calcul","lv":["CM1","CM2"]},{"i":"w9TwOuxqlHo","t":"La proportionnalité : passage à l'unité et tableaux","c":"Maître Lucas","d":426,"m":"Maths","th":"Calcul","lv":["CM1","CM2"]},{"i":"i1YQnh9fcKk","t":"Calculer 98 x 97 EN 10 SECONDES 😎","c":"Hedacademy","d":480,"m":"Maths","th":"Calcul","lv":["CM1","CM2"]},{"i":"9WZIOT5Ulsk","t":"Le périmètre","c":"Maître Lucas","d":481,"m":"Maths","th":"Géométrie","lv":["CM1","CM2"]},{"i":"UkeNJRRBMOg","t":"Différencier l'aire et le périmètre","c":"Maître Lucas","d":255,"m":"Maths","th":"Géométrie","lv":["CM1","CM2"]},{"i":"DWoBuhHamFQ","t":"Tracer des droites parallèles","c":"Maître Lucas","d":320,"m":"Maths","th":"Géométrie","lv":["CM1"]},{"i":"ZzOoIZWYxog","t":"Tracer une figure par symétrie axiale","c":"Maître Lucas","d":358,"m":"Maths","th":"Géométrie","lv":["CM1","CM2"]},{"i":"13tKajQveS4","t":"Reconnaître les axes de symétrie","c":"Maître Lucas","d":312,"m":"Maths","th":"Géométrie","lv":["CM1","CM2"]},{"i":"6ex5FU7sZWQ","t":"Mesurer des angles","c":"Maître Lucas","d":424,"m":"Maths","th":"Géométrie","lv":["CM1","CM2"]},{"i":"Wpxl-Fos3hA","t":"Les angles pour les enfants - Les types d'angles","c":"Smile and Learn - Français","d":231,"m":"Maths","th":"Géométrie","lv":["CM1"]},{"i":"k6iijMB4-SE","t":"Les polygones CM1 - 6ème","c":"Maître Lucas","d":271,"m":"Maths","th":"Géométrie","lv":["CM1","CM2"]},{"i":"gFpJUZKnILE","t":"Les polyèdres (solides)","c":"Maître Lucas","d":508,"m":"Maths","th":"Géométrie","lv":["CM1","CM2"]},{"i":"sMClfLc6Zf0","t":"Les unités de longueur","c":"Maître Lucas","d":478,"m":"Maths","th":"Mesures","lv":["CM1","CM2"]},{"i":"YpoMiPIvjzA","t":"Convertir des longueurs","c":"Maître Lucas","d":474,"m":"Maths","th":"Mesures","lv":["CM1","CM2"]},{"i":"ZAQxUayXpBc","t":"Mesurer les contenances","c":"Maître Lucas","d":648,"m":"Maths","th":"Mesures","lv":["CM1","CM2"]},{"i":"gezWeHs2d4U","t":"Lire les grands nombres (millions)","c":"Maître Lucas","d":348,"m":"Maths","th":"Numération","lv":["CM1","CM2"]},{"i":"LF9r29Iy4NA","t":"Comparer les grands nombres","c":"Maître Lucas","d":273,"m":"Maths","th":"Numération","lv":["CM1","CM2"]},{"i":"0-y8RUNPnQE","t":"Découvrir les fractions","c":"Maître Lucas","d":452,"m":"Maths","th":"Numération","lv":["CM1","CM2"]},{"i":"hRtloUVsI7o","t":"Les fractions supérieures à 1","c":"Maître Lucas","d":522,"m":"Maths","th":"Numération","lv":["CM1","CM2"]},{"i":"Ryy9nmQxeY0","t":"Fractions décimales et nombres décimaux","c":"Maître Lucas","d":625,"m":"Maths","th":"Numération","lv":["CM1","CM2"]},{"i":"mhNZt2K0Khk","t":"Additionner et soustraire des décimaux","c":"Maître Lucas","d":224,"m":"Maths","th":"Numération","lv":["CM1","CM2"]},{"i":"odj60Ff-CTc","t":"Comparer et ranger les décimaux","c":"Maître Lucas","d":495,"m":"Maths","th":"Numération","lv":["CM1","CM2"]},{"i":"p39NsvRlHEU","t":"Résoudre des problèmes","c":"Maître Lucas","d":533,"m":"Maths","th":"Problèmes","lv":["CM1","CM2"]},{"i":"JNJs5wmuWnk","t":"Résoudre des problèmes (méthode)","c":"Maître Lucas","d":546,"m":"Maths","th":"Problèmes","lv":["CM1","CM2"]},{"i":"vUH_ulewp-M","t":"Pollution, écologie, protection de l'environnement","c":"Maître Lucas","d":336,"m":"Sciences","th":"Environnement","lv":["CM1","CM2"]},{"i":"HcMg3ghRfxY","t":"Conseils pour économiser l’eau - Sauvons la planète","c":"Smile and Learn - Français","d":199,"m":"Sciences","th":"Environnement","lv":["CM1"]},{"i":"fZXKyD3yXP0","t":"L'énergie","c":"Maître Lucas","d":399,"m":"Sciences","th":"L'énergie","lv":["CM1","CM2"]},{"i":"RP8QQEMFqps","t":"Pourquoi les volcans entrent-ils en éruption ?","c":"1 jour, 1 question","d":102,"m":"Sciences","th":"La Terre","lv":["CM1"]},{"i":"fbAWHDNm5P0","t":"Comment se forment les volcans ?","c":"Curionautes des sciences","d":163,"m":"Sciences","th":"La Terre","lv":["CM1"]},{"i":"Ofm7F3USovo","t":"L'activité interne de la Terre","c":"Maître Lucas","d":328,"m":"Sciences","th":"La Terre","lv":["CM1","CM2"]},{"i":"c0UsOlqG_Xk","t":"C'est pas sorcier - Séismes : Quand la Terre tremble","c":"C'est pas sorcier","d":1612,"m":"Sciences","th":"La Terre","lv":["CM1"]},{"i":"jdInvnIkwIk","t":"Le système solaire","c":"Maître Lucas","d":487,"m":"Sciences","th":"La Terre","lv":["CM1","CM2"]},{"i":"UKKOzSIZLSo","t":"Les mélanges","c":"Maître Lucas","d":499,"m":"Sciences","th":"La matière","lv":["CM1","CM2"]},{"i":"Q6uGsZ9zv_Q","t":"La digestion","c":"Maître Lucas","d":325,"m":"Sciences","th":"Le vivant","lv":["CM1","CM2"]},{"i":"8XlIcx8ouJ0","t":"La respiration","c":"Maître Lucas","d":357,"m":"Sciences","th":"Le vivant","lv":["CM1","CM2"]},{"i":"Bn2DCk3FKrc","t":"Comment fonctionne la respiration ?","c":"Curionautes des sciences","d":154,"m":"Sciences","th":"Le vivant","lv":["CM1"]},{"i":"vprvAy7GXgo","t":"La reproduction des plantes","c":"Maître Lucas","d":280,"m":"Sciences","th":"Le vivant","lv":["CM1","CM2"]},{"i":"niw75EnkPhA","t":"Classer les êtres vivants","c":"Maître Lucas","d":278,"m":"Sciences","th":"Le vivant","lv":["CM1","CM2"]},{"i":"wPohnCL743E","t":"Alimentation et hygiène de vie","c":"Maître Lucas","d":509,"m":"Sciences","th":"Le vivant","lv":["CM1","CM2"]},{"i":"kANZuq_WTWY","t":"La famille (vocabulaire)","c":"Yannick Sayer","d":132,"m":"Anglais","th":"La famille","lv":["CM2"]},{"i":"umwAciQr81s","t":"Anglais - Les animaux","c":"Mon école","d":96,"m":"Anglais","th":"Les animaux","lv":["CM2"]},{"i":"3NRB8lms3h4","t":"Anglais Débutant - The animals in English","c":"WizAide","d":366,"m":"Anglais","th":"Les animaux","lv":["CM2"]},{"i":"1cSYUqrgzEg","t":"Anglais - Les vêtements","c":"Mon école","d":86,"m":"Anglais","th":"Les vêtements","lv":["CM2"]},{"i":"OcqGNLy0v_0","t":"Picasso, l'homme et l'artiste","c":"Lumni","d":231,"m":"Arts","th":"Histoire des arts","lv":["CM2"]},{"i":"OaZ4D-hvPHc","t":"Les instruments : vent, corde, percussion","c":"Smile and Learn - Français","d":522,"m":"Arts","th":"Musique","lv":["CM2"]},{"i":"b_1bKay_QRs","t":"Les instruments de l'orchestre","c":"C'est pas sorcier","d":1654,"m":"Arts","th":"Musique","lv":["CM2"]},{"i":"C3THYevbKNE","t":"Le droit de vote des femmes","c":"Lumni","d":342,"m":"EMC","th":"Démocratie","lv":["CM2"]},{"i":"bFni39BhfkY","t":"Comment ça se passe, le vote ?","c":"1 jour, 1 question","d":102,"m":"EMC","th":"Démocratie","lv":["CM2"]},{"i":"fw8lA9Z1Yow","t":"C'est quoi la démocratie ?","c":"1 jour, 1 question","d":102,"m":"EMC","th":"Démocratie","lv":["CM2"]},{"i":"hzLKgETg1eA","t":"C'est quoi être citoyen ?","c":"1 jour, 1 question","d":102,"m":"EMC","th":"Démocratie","lv":["CM2"]},{"i":"okZBvGSpmQw","t":"C'est quoi l'Assemblée nationale ?","c":"1 jour, 1 question","d":102,"m":"EMC","th":"Démocratie","lv":["CM2"]},{"i":"TFdOCfU859w","t":"C'est quoi la laïcité ?","c":"1 jour, 1 question","d":102,"m":"EMC","th":"La République","lv":["CM2"]},{"i":"oZ0ld2scKzc","t":"Qu'est-ce que la laïcité ?","c":"Lumni","d":187,"m":"EMC","th":"La République","lv":["CM2"]},{"i":"zeAjp6B_DNs","t":"C'est quoi le harcèlement à l'école ?","c":"1 jour, 1 question","d":102,"m":"EMC","th":"Vivre ensemble","lv":["CM2"]},{"i":"zUW3JyLtYsQ","t":"C'est quoi le cyberharcèlement ?","c":"1 jour, 1 question","d":102,"m":"EMC","th":"Vivre ensemble","lv":["CM2"]},{"i":"nKwVOTntlVc","t":"C'est quoi l'égalité filles-garçons ?","c":"1 jour, 1 question","d":102,"m":"EMC","th":"Égalité","lv":["CM2"]},{"i":"LExBCyxzWIU","t":"C'est quoi le racisme ?","c":"1 jour, 1 question","d":102,"m":"EMC","th":"Égalité","lv":["CM2"]},{"i":"1T8GXJCEr2Y","t":"C'est quoi la discrimination ?","c":"1 jour, 1 question","d":102,"m":"EMC","th":"Égalité","lv":["CM2"]},{"i":"sYaKf8TmLgg","t":"Les types et les formes de phrases","c":"Eveiller mon enfant","d":424,"m":"Français","th":"Grammaire","lv":["CM2"]},{"i":"MwN15MA3urk","t":"Les registres de langue","c":"nicolas RENAUD","d":147,"m":"Français","th":"Vocabulaire","lv":["CM2"]},{"i":"Z7enoBRUt1s","t":"C'est quoi l'Union européenne ?","c":"1 jour, 1 question","d":102,"m":"Géographie","th":"L'Europe","lv":["CM2"]},{"i":"ZVq2iPdgBOI","t":"C'est quoi l'Union européenne ? (Jamy)","c":"Lumni","d":165,"m":"Géographie","th":"L'Europe","lv":["CM2"]},{"i":"khymaL7MhOI","t":"La France et ses montagnes","c":"C'est pas sorcier","d":1560,"m":"Géographie","th":"La France","lv":["CM2"]},{"i":"JXUXT5NOrx4","t":"Comment évolue la population mondiale ?","c":"1 jour, 1 question","d":102,"m":"Géographie","th":"Le monde","lv":["CM2"]},{"i":"bz2wfLEfrSI","t":"5 clés pour comprendre la population mondiale","c":"Le Blob","d":581,"m":"Géographie","th":"Le monde","lv":["CM2"]},{"i":"qnqFUUldSy8","t":"C'est quoi les outre-mer ?","c":"1 jour, 1 question","d":102,"m":"Géographie","th":"Le monde","lv":["CM2"]},{"i":"b1wG6WKrh68","t":"Comment vivent les enfants dans les outre-mer ?","c":"1 jour, 1 question","d":102,"m":"Géographie","th":"Le monde","lv":["CM2"]},{"i":"po7iuNe3S7I","t":"Mayotte, une île stratégique : son histoire","c":"Lumni","d":257,"m":"Géographie","th":"Mayotte","lv":["CM2"]},{"i":"vNuEwfZ403Y","t":"Se déplacer en France et en Europe","c":"Lumni","d":307,"m":"Géographie","th":"Se déplacer","lv":["CM2"]},{"i":"pmg2Njw_KzE","t":"François 1er","c":"Quelle Histoire","d":422,"m":"Histoire","th":"La Renaissance","lv":["CM2"]},{"i":"94n39duS1v0","t":"Napoléon","c":"Quelle Histoire","d":471,"m":"Histoire","th":"Le XIXe siècle","lv":["CM2"]},{"i":"PFDIr1T7PYY","t":"La révolution industrielle - 5 Choses que tu devrais savoir","c":"Smile and Learn - Français","d":198,"m":"Histoire","th":"Le XIXe siècle","lv":["CM2"]},{"i":"t-rPJUkjbvQ","t":"Pourquoi la Première Guerre mondiale ?","c":"1 jour, 1 question","d":102,"m":"Histoire","th":"Le XXe siècle","lv":["CM2"]},{"i":"pC_I0Zozbgs","t":"La Première Guerre mondiale","c":"Quelle Histoire","d":222,"m":"Histoire","th":"Le XXe siècle","lv":["CM2"]},{"i":"5BBG7LyoLo4","t":"Pourquoi la Seconde Guerre mondiale ?","c":"1 jour, 1 question","d":102,"m":"Histoire","th":"Le XXe siècle","lv":["CM2"]},{"i":"3W8SETboN3c","t":"Comment se souvient-on de la Shoah ?","c":"1 jour, 1 question","d":117,"m":"Histoire","th":"Le XXe siècle","lv":["CM2"]},{"i":"JqNXR73Du48","t":"Louis XIV","c":"Quelle Histoire","d":261,"m":"Histoire","th":"Les Temps modernes","lv":["CM2"]},{"i":"YU_l6f2CxyQ","t":"proportionnalite et pourcentages","c":"nicolas RENAUD","d":120,"m":"Maths","th":"Calcul","lv":["CM2"]},{"i":"tLcnFoFxmxU","t":"Comment devenir un génie du calcul mental ? - Logique !","c":"Lumni","d":192,"m":"Maths","th":"Calcul","lv":["CM2"]},{"i":"nNTgVkvDBss","t":"Calculer une aire - CM2 / Sixième","c":"Yvan Monka","d":389,"m":"Maths","th":"Géométrie","lv":["CM2"]},{"i":"oahrIKAmY8A","t":"Définition des solides en géométrie : maths en cm1 et cm2","c":"Yannick Sayer","d":172,"m":"Maths","th":"Géométrie","lv":["CM2"]},{"i":"RLw3ugXO6Kk","t":"COMMENT CONVERTIR DES LONGUEURS ? - CM2 / 6ᵉ","c":"Hedacademy","d":203,"m":"Maths","th":"Mesures","lv":["CM2"]},{"i":"fr5GemewG4Q","t":"Comparer les nombres décimaux - Sixième","c":"Yvan Monka","d":316,"m":"Maths","th":"Numération","lv":["CM2"]},{"i":"_9hSPS24NMY","t":"les fractions decimales","c":"nicolas RENAUD","d":155,"m":"Maths","th":"Numération","lv":["CM2"]},{"i":"uqBEfHwZTX8","t":"Décomposer un nombre en fractions décimales - Sixième","c":"Yvan Monka","d":238,"m":"Maths","th":"Numération","lv":["CM2"]},{"i":"8qiEfhA-Wk4","t":"Comment ça marche, Internet ?","c":"1 jour, 1 question","d":102,"m":"Numérique","th":"Internet","lv":["CM2"]},{"i":"SizF1LnHtXc","t":"Comment ça marche Internet ? - Curionautes des sciences","c":"Curionautes des sciences","d":146,"m":"Numérique","th":"Internet","lv":["CM2"]},{"i":"Hq1fGXpI2_I","t":"Le fonctionnement d'Internet","c":"C'est pas sorcier","d":1562,"m":"Numérique","th":"Internet","lv":["CM2"]},{"i":"pdtMUgnmRa4","t":"Apprendre à programmer avec SCRATCH #1","c":"Yvan Monka","d":937,"m":"Numérique","th":"Programmation","lv":["CM2"]},{"i":"ioCiS980Dbg","t":"C'est quoi un algorithme ?","c":"1 jour, 1 question","d":135,"m":"Numérique","th":"Programmation","lv":["CM2"]},{"i":"BZjAKp_5i5Y","t":"How to Create a Scratch Game for Beginners","c":"Professeur Scratch","d":372,"m":"Numérique","th":"Programmation","lv":["CM2"]},{"i":"-PD-0J50MaQ","t":"C'est quoi les dangers d'internet ? (EP. 688)","c":"1 jour, 1 question","d":102,"m":"Numérique","th":"Sécurité","lv":["CM2"]},{"i":"BFFH1bfAq4Y","t":"C'est quoi la protection des données personnelles ?","c":"1 jour, 1 question","d":102,"m":"Numérique","th":"Sécurité","lv":["CM2"]},{"i":"q92jr26f9wk","t":"C'est quoi les fake news ?","c":"1 jour, 1 question","d":131,"m":"Numérique","th":"Sécurité","lv":["CM2"]},{"i":"CwaZgyHluMo","t":"C'est quoi l'esprit critique ?","c":"Info ou Mytho ? ","d":104,"m":"Numérique","th":"Sécurité","lv":["CM2"]},{"i":"skwiH2RNgDw","t":"C'est quoi le développement durable ?","c":"1 jour, 1 question","d":102,"m":"Sciences","th":"Environnement","lv":["CM2"]},{"i":"_2X4JvI6RwQ","t":"C'est quoi le recyclage des déchets ?","c":"1 jour, 1 question","d":134,"m":"Sciences","th":"Environnement","lv":["CM2"]},{"i":"I7cajVnzm8k","t":"Le système solaire (C'est pas sorcier)","c":"C'est pas sorcier","d":1581,"m":"Sciences","th":"La Terre","lv":["CM2"]},{"i":"pFupk0S83Ww","t":"Que se passe-t-il à la puberté ?","c":"Lumni","d":160,"m":"Sciences","th":"Le vivant","lv":["CM2"]}];
+const PROG   = {"CP":{"short":"cycle 2","resume":"La grande année : apprendre à lire, à écrire, à compter. Tout se joue sur la régularité, pas sur la quantité.","matieres":[{"n":"Français","e":"📖","c":"#D9462F","att":"Lire seul un texte court et le comprendre ; écrire en cursive ; produire une phrase correcte.","dom":[["Langage oral","écouter, raconter, dire un poème, poser une question"],["Lecture","syllabes, sons, déchiffrage, premiers textes"],["Écriture","cursive, copie, dictée de syllabes et de mots"],["Étude de la langue","la phrase, le nom, le verbe, le vocabulaire"]]},{"n":"Maths","e":"🔢","c":"#23618F","att":"Compter jusqu'à 99, additionner et soustraire, reconnaître les figures, se repérer dans l'espace.","dom":[["Nombres","0 à 99, dizaines et unités, comparer, ranger"],["Calcul","additions et soustractions, doubles, premiers problèmes"],["Grandeurs et mesures","longueurs, euros, dates et durées"],["Espace et géométrie","se repérer, figures simples, solides"],["Données","lire un tableau à double entrée"]]},{"n":"Questionner le monde","e":"🌱","c":"#31825A","att":"Se repérer dans le temps et dans l'espace, observer le vivant et la matière.","dom":[["Le temps","jour, semaine, mois, saisons, hier/aujourd'hui/demain"],["L'espace","la classe, l'école, le quartier, le plan"],["Le vivant","animaux, plantes, corps humain, hygiène"],["La matière","les cinq sens, l'eau, les objets"]]},{"n":"EMC","e":"⚖️","c":"#65489B","att":"Respecter les règles de la classe, nommer ses émotions, vivre avec les autres.","dom":[["Vivre ensemble","règles, politesse, respect, différence"],["Soi et les autres","émotions, consentement, sécurité"]]},{"n":"Anglais","e":"🇬🇧","c":"#B93A73","att":"Comprendre et répéter des mots simples : se saluer, nommer les couleurs et les nombres.","dom":[["Oral","écouter, répéter, chanter"],["Vocabulaire","salutations, couleurs, nombres de 1 à 10"]]},{"n":"Arts","e":"🎨","c":"#C98A12","att":"Explorer les couleurs et les matières, chanter ensemble, tenir un rythme.","dom":[["Arts plastiques","traces, couleurs, collage, modelage"],["Musique","comptines, rythme, écoute"]]}]},"CE1":{"short":"cycle 2","resume":"On consolide la lecture et on entre vraiment dans le calcul posé et la production d'écrit.","matieres":[{"n":"Français","e":"📖","c":"#D9462F","att":"Lire environ 70 mots par minute, écrire trois ou quatre phrases, conjuguer au présent.","dom":[["Lecture","fluence, compréhension, textes plus longs"],["Écriture","copie soignée, dictée, premiers textes"],["Étude de la langue","nom, verbe, déterminant, phrase négative et interrogative"],["Conjugaison","le présent des verbes en -er"]]},{"n":"Maths","e":"🔢","c":"#23618F","att":"Nombres jusqu'à 999, tables, addition posée, mesurer et comparer.","dom":[["Nombres","jusqu'à 999, centaines, comparer, ranger"],["Calcul","tables, addition posée avec retenue, début de multiplication"],["Grandeurs et mesures","longueurs (m, cm), lire l'heure"],["Espace et géométrie","vocabulaire géométrique, figures, solides"]]},{"n":"Questionner le monde","e":"🌱","c":"#31825A","att":"Observer, comparer, décrire : le vivant, la matière, le temps long.","dom":[["Le vivant","dents, alimentation, croissance"],["La matière","l'air, l'eau, les états"],["Le temps et l'espace","frises, plans, paysages"]]},{"n":"EMC","e":"⚖️","c":"#65489B","att":"Comprendre pourquoi il y a des règles, et ce qu'est un règlement.","dom":[["Vivre ensemble","règlement, droits et devoirs, entraide"]]},{"n":"Anglais","e":"🇬🇧","c":"#B93A73","att":"Comprendre des consignes simples et nommer ce qui entoure l'enfant.","dom":[["Oral","se présenter, compter, nommer les couleurs"]]},{"n":"Arts","e":"🎨","c":"#C98A12","att":"Découvrir des œuvres, expérimenter des techniques, chanter.","dom":[["Arts plastiques","dessin, peinture, assemblage"],["Musique","chants, instruments, écoute"]]}]},"CE2":{"short":"cycle 2","resume":"L'année charnière : lecture fluide, production d'écrit autonome, et l'entrée dans l'histoire.","matieres":[{"n":"Français","e":"📖","c":"#D9462F","att":"Lire couramment, comprendre l'implicite, rédiger un texte court et le relire.","dom":[["Lecture","fluence, compréhension, lecture de consignes"],["Écriture","rédaction courte, révision de son texte"],["Étude de la langue","sujet-verbe, groupes, types de phrases"],["Conjugaison","présent, imparfait, futur, passé composé"],["Orthographe","accents, pluriel des noms, accords simples"]]},{"n":"Maths","e":"🔢","c":"#23618F","att":"Nombres jusqu'à 9 999, multiplication posée, fractions simples, géométrie.","dom":[["Nombres","jusqu'à 9 999, comparer, encadrer"],["Calcul","multiplication posée, division simple, calcul mental"],["Fractions","demi, quart, tiers"],["Grandeurs et mesures","longueurs, masses, contenances, durées"],["Espace et géométrie","angle droit, figures, symétrie"]]},{"n":"Questionner le monde","e":"🌱","c":"#31825A","att":"Matière, vivant, énergie : observer, expérimenter, expliquer.","dom":[["La matière","eau, air, mélanges, états"],["Le vivant","chaînes alimentaires, régimes, cycles"],["L'énergie et les objets","sources d'énergie, objets techniques"]]},{"n":"Histoire","e":"🏛️","c":"#9B5320","att":"La Préhistoire et l'apparition de l'écriture.","dom":[["La Préhistoire","premiers hommes, art pariétal, sédentarisation"]]},{"n":"Géographie","e":"🗺️","c":"#1F7A6C","att":"Mon espace proche, la France, les régions.","dom":[["Mon espace","quartier, commune, département, région"],["La France","relief, villes, régions"]]},{"n":"EMC","e":"⚖️","c":"#65489B","att":"Vivre ensemble dans une classe qui débat et qui décide.","dom":[["Vivre ensemble","règlement, conseil, respect, égalité"]]},{"n":"Anglais","e":"🇬🇧","c":"#B93A73","att":"Se présenter, compter jusqu'à 20, nommer les couleurs et la famille.","dom":[["Oral","présentation, nombres, couleurs"]]},{"n":"Arts","e":"🎨","c":"#C98A12","att":"Regarder, décrire, expérimenter.","dom":[["Arts plastiques","couleurs, matières, techniques"],["Musique","instruments, rythme, chant"]]}]},"CM1":{"short":"cycle 3","resume":"On quitte le « lire pour apprendre à lire » : la lecture sert à apprendre. Grammaire, fractions, histoire.","matieres":[{"n":"Français","e":"📖","c":"#D9462F","att":"Identifier sujet, verbe et compléments ; conjuguer à trois temps ; écrire un récit de 10 à 15 lignes.","dom":[["Grammaire","sujet, verbe, compléments, groupe nominal, attribut"],["Conjugaison","présent, imparfait, futur"],["Orthographe","accord sujet-verbe, accords dans le groupe nominal"],["Lecture","comprendre un texte narratif ou explicatif"],["Écriture","récit, description, révision de son texte"],["Lexique","synonymes, familles de mots, dictionnaire"]]},{"n":"Maths","e":"🔢","c":"#23618F","att":"Grands nombres, fractions, décimaux, division, proportionnalité, périmètre.","dom":[["Nombres","grands nombres, fractions, décimaux"],["Calcul","multiplication et division posées, calcul mental"],["Grandeurs et mesures","périmètre, longueurs, angles"],["Espace et géométrie","droites, symétrie, polygones, solides"],["Problèmes","résoudre un problème en plusieurs étapes"]]},{"n":"Sciences","e":"🔬","c":"#31825A","att":"La matière, le vivant, la Terre, l'énergie : une démarche, pas une leçon à réciter.","dom":[["La matière","états, mélanges, eau"],["Le vivant","digestion, respiration, classification"],["La Terre","volcans, séismes, activité interne"],["L'énergie","circuits électriques"]]},{"n":"Histoire","e":"🏛️","c":"#9B5320","att":"De la Préhistoire à la fin du Moyen Âge.","dom":[["La Préhistoire","traces, premiers hommes"],["L'Antiquité","Gaulois, Rome, romanisation"],["Le Moyen Âge","châteaux, Charlemagne, guerre de Cent Ans"]]},{"n":"Géographie","e":"🗺️","c":"#1F7A6C","att":"Se repérer sur la Terre, habiter la France.","dom":[["Se repérer","lignes imaginaires, continents, océans"],["La France","relief, villes, espaces"]]},{"n":"EMC","e":"⚖️","c":"#65489B","att":"La République, ses symboles, la règle commune.","dom":[["La République","symboles, valeurs, laïcité"],["Vivre ensemble","respect, conseil, égalité"]]},{"n":"Anglais","e":"🇬🇧","c":"#B93A73","att":"Se présenter, décrire, comprendre un court dialogue.","dom":[["Oral","se présenter, nombres, corps, couleurs"]]},{"n":"Arts","e":"🎨","c":"#C98A12","att":"Techniques et histoire des arts.","dom":[["Arts plastiques","couleurs, portrait, composition"],["Musique","instruments, rythme, chant"]]},{"n":"Numérique","e":"💻","c":"#37496B","att":"Utiliser un ordinateur, chercher, commencer à programmer.","dom":[["Outils","ordinateur, fichiers, recherche"],["Programmation","algorithme, Scratch"]]}]},"CM2":{"short":"cycle 3","resume":"La dernière année du primaire : tout doit tenir debout seuls — lire, écrire, calculer, argumenter.","matieres":[{"n":"Français","e":"📖","c":"#D9462F","att":"Lire 120 mots par minute et comprendre, écrire un texte structuré de 15 lignes, maîtriser les accords.","dom":[["Grammaire","phrase complexe, propositions, pronoms, compléments"],["Conjugaison","passé simple, plus-que-parfait, tous les temps"],["Orthographe","accords, homophones, participe passé"],["Lecture","texte littéraire et documentaire, implicite"],["Écriture","lettre, dialogue, récit, révision de son texte"],["Lexique","niveaux de langue, champ lexical, dictionnaire"]]},{"n":"Maths","e":"🔢","c":"#23618F","att":"Nombres jusqu'au milliard, décimaux, quatre opérations, proportionnalité, aires.","dom":[["Nombres","jusqu'au milliard, fractions, décimaux"],["Calcul","4 opérations posées, calcul mental, proportionnalité, pourcentages, moyenne"],["Grandeurs et mesures","unités et conversions, durées, aires"],["Espace et géométrie","perpendiculaires, parallèles, symétrie, angles, solides, patrons"],["Problèmes","problèmes à plusieurs étapes, justification"]]},{"n":"Sciences","e":"🔬","c":"#31825A","att":"Expliquer avec une démarche : vivant, Terre, énergie, environnement.","dom":[["Le vivant","reproduction, évolution, classification"],["La Terre","système solaire, risques, climat"],["L'énergie","sources, conversions, économies"],["Environnement","développement durable, déchets, biodiversité"],["Objets techniques","fonctionnement, conception"]]},{"n":"Histoire","e":"🏛️","c":"#9B5320","att":"De la Renaissance à l'Europe d'aujourd'hui.","dom":[["Temps modernes","Renaissance, Louis XIV, grandes découvertes"],["Révolution et XIXe","1789, Napoléon, République, industrialisation"],["XXe siècle","guerres mondiales, Shoah, Europe, décolonisation"]]},{"n":"Géographie","e":"🗺️","c":"#1F7A6C","att":"Habiter, se déplacer, communiquer ; la France dans le monde.","dom":[["Habiter","métropoles, espaces de vie"],["Se déplacer","mobilités en France et en Europe"],["Le monde","population, France dans le monde, outre-mer"],["Risques","risques naturels et technologiques"]]},{"n":"EMC","e":"⚖️","c":"#65489B","att":"La République, la démocratie, les droits, le harcèlement.","dom":[["La République","laïcité, symboles, valeurs"],["Démocratie","vote, élections, engagement"],["Droits","droits de l'enfant, égalité, lutte contre le harcèlement"]]},{"n":"Anglais","e":"🇬🇧","c":"#B93A73","att":"Niveau A1 : se présenter, décrire, raconter, comprendre.","dom":[["Oral","se présenter, dialogues, prononciation"],["Vocabulaire","famille, vêtements, animaux, météo, maison, heure"]]},{"n":"Arts","e":"🎨","c":"#C98A12","att":"Analyser une œuvre, produire, interpréter.","dom":[["Arts plastiques","portrait, couleur, composition"],["Histoire des arts","œuvres et courants"],["Musique","familles d'instruments, rythme, chant"]]},{"n":"Numérique","e":"💻","c":"#37496B","att":"Chercher, vérifier, protéger, programmer.","dom":[["Internet","fonctionnement, dangers, esprit critique"],["Programmation","algorithmes, Scratch"],["Outils","ordinateur, traitement de texte"]]}]}};
+const LEVELS = ["CP","CE1","CE2","CM1","CM2"];
+const MORDER = ["Français","Maths","Questionner le monde","Sciences","Histoire","Géographie","EMC","Anglais","Arts","Numérique","EPS"];
+
+const $ = s => document.querySelector(s);
+const state = {lv:"CP", mat:"Tout", q:""};
+let seen = new Set(JSON.parse(localStorage.getItem("ecoletube_vus")||"[]"));
+const saveSeen = () => localStorage.setItem("ecoletube_vus", JSON.stringify([...seen]));
+
+function fmt(s){ if(!s) return ""; const m=Math.floor(s/60); const r=Math.round(s%60); return m+":"+String(r).padStart(2,"0"); }
+function matColor(m){ const d=document.querySelector('.matbtn[data-m="'+m+'"] .dot'); return d? d.style.background : "#16213C"; }
+
+/* ---- filtres niveau ---- */
+LEVELS.forEach(l=>{
+  const b=document.createElement("button");
+  b.className="lvbtn"; b.dataset.lv=l;
+  const p=PROG[l]||{};
+  b.innerHTML = l+"<small>"+(p.short||"cycle")+"</small>";
+  b.onclick=()=>{state.lv=l; state.mat="Tout"; render();};
+  $("#levels").appendChild(b);
+});
+const ball=document.createElement("button");
+ball.className="lvbtn"; ball.dataset.lv="Tout"; ball.innerHTML="TOUT<small>5 niveaux</small>";
+ball.onclick=()=>{state.lv="Tout"; state.mat="Tout"; render();};
+$("#levels").appendChild(ball);
+
+/* ---- filtres matière ---- */
+function buildMats(){
+  const mats = state.lv==="Tout" ? MORDER : (PROG[state.lv]? PROG[state.lv].matieres.map(x=>x.n) : []);
+  const box=$("#mats"); box.innerHTML="";
+  const mk=(n,label,color,icon)=>{
+    const b=document.createElement("button");
+    b.className="matbtn"+(state.mat===n?" on":""); b.dataset.m=n;
+    b.innerHTML='<span class="dot" style="background:'+color+'"></span>'+(icon?icon+" ":"")+label;
+    b.onclick=()=>{state.mat=n; render();};
+    box.appendChild(b);
+  };
+  mk("Tout","Tout","#16213C","");
+  mats.forEach(n=>{
+    const src = (PROG[state.lv]&&PROG[state.lv].matieres.find(x=>x.n===n)) || {c:"#16213C",e:""};
+    mk(n,n,src.c,src.e);
+  });
+}
+
+/* ---- rendu principal ---- */
+function render(){
+  buildMats();
+  document.querySelectorAll(".lvbtn").forEach(b=>b.classList.toggle("on",b.dataset.lv===state.lv));
+
+  const q = state.q.trim().toLowerCase();
+  let list = VIDEOS.filter(v=>{
+    if(state.lv!=="Tout" && !v.lv.includes(state.lv)) return false;
+    if(state.mat!=="Tout" && v.m!==state.mat) return false;
+    if(q){
+      const hay=(v.t+" "+v.c+" "+v.th+" "+v.m).toLowerCase();
+      if(!hay.includes(q)) return false;
+    }
+    return true;
+  });
+
+  const title = state.lv==="Tout" ? "Tout le primaire" : state.lv;
+  $("#lvTitle").textContent = title;
+  const p = PROG[state.lv];
+  $("#lvSub").textContent = state.lv==="Tout"
+    ? "Toutes les vidéos, du CP au CM2. Filtre par matière pour réduire."
+    : (p? p.resume : "");
+
+  // progression
+  const tot = list.length, vus = list.filter(v=>seen.has(v.i)).length;
+  const pct = tot? Math.round(100*vus/tot):0;
+  $("#progTxt").textContent = vus+" / "+tot;
+  $("#progBar").style.width = pct+"%";
+  $("#seenPct").textContent = pct+" % vu";
+
+  const box=$("#list"); box.innerHTML="";
+  if(!list.length){
+    box.innerHTML='<div class="empty"><b>Aucune vidéo pour cette recherche.</b>Essaie un mot plus simple : « fractions », « eau », « accord ».</div>';
+    renderProgramme(); return;
+  }
+  const groups={};
+  list.forEach(v=>{ (groups[v.m]=groups[v.m]||[]).push(v); });
+  Object.keys(groups).sort((a,b)=>MORDER.indexOf(a)-MORDER.indexOf(b)).forEach(m=>{
+    const meta = (state.lv!=="Tout" && p && p.matieres.find(x=>x.n===m)) || {c:"#16213C",e:"•",att:""};
+    const sec=document.createElement("section"); sec.className="matsec";
+    sec.innerHTML='<header><div class="ico" style="background:'+meta.c+'">'+meta.e+'</div>'+
+      '<div><h3>'+m+'</h3>'+(meta.att?'<p class="att">'+meta.att+'</p>':'')+'</div>'+
+      '<div class="n">'+groups[m].length+' vidéo'+(groups[m].length>1?'s':'')+'</div></header>';
+    const g=document.createElement("div"); g.className="grid";
+    groups[m].forEach(v=>g.appendChild(card(v)));
+    sec.appendChild(g); box.appendChild(sec);
+  });
+  renderProgramme();
+}
+
+function card(v){
+  const el=document.createElement("article");
+  el.className="card"+(seen.has(v.i)?" seen":"");
+  el.innerHTML=
+    '<div class="thumb"><img loading="lazy" src="https://i.ytimg.com/vi/'+v.i+'/mqdefault.jpg" alt="">'+
+      '<span class="dur">'+fmt(v.d)+'</span>'+
+      '<button class="seenbtn" title="Marquer comme vue">✓</button>'+
+      '<div class="play"><span>▶</span></div></div>'+
+    '<div class="body"><div class="thm">'+v.th+'</div><h4>'+v.t+'</h4>'+
+      '<div class="meta"><span class="ch">'+v.c+'</span><span class="lvls">'+v.lv.map(l=>'<i>'+l+'</i>').join("")+'</span></div></div>';
+  el.onclick=e=>{
+    if(e.target.classList.contains("seenbtn")){
+      e.stopPropagation();
+      seen.has(v.i)? seen.delete(v.i): seen.add(v.i);
+      saveSeen(); el.classList.toggle("seen", seen.has(v.i)); updateProg(); return;
+    }
+    openVideo(v);
+  };
+  return el;
+}
+
+function updateProg(){
+  const q=state.q.trim().toLowerCase();
+  const list=VIDEOS.filter(v=>(state.lv==="Tout"||v.lv.includes(state.lv))&&(state.mat==="Tout"||v.m===state.mat)&&
+    (!q||(v.t+" "+v.c+" "+v.th+" "+v.m).toLowerCase().includes(q)));
+  const vus=list.filter(v=>seen.has(v.i)).length;
+  $("#progTxt").textContent=vus+" / "+list.length;
+  const pct=list.length?Math.round(100*vus/list.length):0;
+  $("#progBar").style.width=pct+"%"; $("#seenPct").textContent=pct+" % vu";
+}
+
+/* ---- modal ---- */
+let current=null;
+function openVideo(v){
+  current=v;
+  $("#mTitle").textContent=v.t;
+  $("#mMeta").textContent=v.c+" · "+fmt(v.d)+" · "+v.th+" · "+v.lv.join(", ");
+  $("#mFrame").src="https://www.youtube-nocookie.com/embed/"+v.i+"?autoplay=1&rel=0&modestbranding=1";
+  $("#mLink").href="https://www.youtube.com/watch?v="+v.i;
+  $("#mSeen").classList.toggle("on",seen.has(v.i));
+  $("#mSeen").textContent = seen.has(v.i)? "✓ Vue" : "✓ Marquer comme vue";
+  $("#modal").classList.add("open");
+  document.body.style.overflow="hidden";
+}
+function closeVideo(){
+  $("#modal").classList.remove("open");
+  $("#mFrame").src="";
+  document.body.style.overflow="";
+  render();
+}
+$("#mClose").onclick=closeVideo;
+$("#modal").onclick=e=>{ if(e.target.id==="modal") closeVideo(); };
+document.addEventListener("keydown",e=>{ if(e.key==="Escape"&&current) closeVideo(); });
+$("#mSeen").onclick=()=>{
+  if(!current) return;
+  seen.has(current.i)? seen.delete(current.i): seen.add(current.i);
+  saveSeen();
+  $("#mSeen").classList.toggle("on",seen.has(current.i));
+  $("#mSeen").textContent = seen.has(current.i)? "✓ Vue" : "✓ Marquer comme vue";
+};
+
+/* ---- programme ---- */
+function renderProgramme(){
+  const p=PROG[state.lv];
+  if(!p){ $("#progH").textContent="Le programme, du CP au CM2"; $("#progBody").innerHTML=
+    '<div class="chans"><div class="chan"><b>Choisis un niveau</b><span>Le programme s\'affiche niveau par niveau : CP, CE1, CE2, CM1 ou CM2.</span></div></div>'; return; }
+  $("#progH").textContent="Ce que l'élève doit savoir à la fin du "+state.lv;
+  let h='<table class="progtable"><thead><tr><th style="width:150px">Matière</th><th>Domaines</th><th style="width:32%">Ce qu\'on attend</th></tr></thead><tbody>';
+  p.matieres.forEach(m=>{
+    h+='<tr><td class="m"><span class="pill"><span style="color:'+m.c+'">●</span>'+m.n+'</span></td><td><ul>'+
+       m.dom.map(d=>'<li><b>'+d[0]+'</b> — '+d[1]+'</li>').join("")+'</ul></td><td>'+m.att+'</td></tr>';
+  });
+  h+='</tbody></table>';
+  $("#progBody").innerHTML=h;
+}
+
+/* ---- chaînes ---- */
+const CH=[
+ ["Maître Lucas","CP → CM2, toutes matières. La colonne vertébrale du site : une vidéo par notion, titrée avec le niveau.","https://www.youtube.com/@maitrelucas"],
+ ["Les Fondamentaux","Réseau Canopé. Petites animations officielles, très claires, pour chaque notion du programme.","https://www.youtube.com/@lesfondamentaux"],
+ ["Lumni","France Télévisions. Vidéos et dossiers classés par niveau et par matière.","https://www.youtube.com/@lumni"],
+ ["1 jour, 1 question","Une question d'actualité expliquée en 1 min 30. Parfait pour l'EMC, la géographie, les débats.","https://www.youtube.com/@1jour1question"],
+ ["C'est pas sorcier","Les sciences et les technologies en 26 min. À découper : on ne regarde pas tout d'un coup.","https://www.youtube.com/@cestpassorcier"],
+ ["Quelle Histoire","Les grands personnages et les grandes périodes en dessin animé. Idéal pour entrer dans l'histoire.","https://www.youtube.com/@QuelleHistoire"],
+ ["Smile and Learn","Français, maths, sciences : court, coloré, bien rythmé. Bon pour les révisions du soir.","https://www.youtube.com/@SmileandLearn-Francais"],
+ ["Eveiller mon enfant","Lecture, sons, vocabulaire. Très utile au CP et pour les enfants allophones.","https://www.youtube.com/@eveillermonenfant"],
+ ["Hedacademy","Maths pas à pas, posé et expliqué. Pour les notions de CM1-CM2 qui Coincent.","https://www.youtube.com/@Hedacademy"],
+ ["Curionautes des sciences","Sciences et esprit critique, formats courts. Bon complément de « Questionner le monde ».","https://www.youtube.com/@Curionautes"],
+ ["Récréakidz","Leçons et exercices de français et de maths, CP → CM2, très scolaires.","https://www.youtube.com/@Recreakidz"],
+ ["jerevise","Fiches et vidéos courtes de révision, utiles pour réactiver la mémoire avant un contrôle.","https://www.youtube.com/@jerevise"]
+];
+$("#chans").innerHTML=CH.map(c=>'<a class="chan" href="'+c[2]+'" target="_blank" rel="noopener"><em>chaîne</em><b>'+c[0]+'</b><span>'+c[1]+'</span></a>').join("");
+
+/* ---- recherche ---- */
+let tm;
+$("#q").addEventListener("input",e=>{
+  clearTimeout(tm);
+  tm=setTimeout(()=>{ state.q=e.target.value; render(); },140);
+});
+
+/* ---- init ---- */
+$("#sVid").textContent = VIDEOS.length;
+$("#sCh").textContent = new Set(VIDEOS.map(v=>v.c)).size;
+$("#sTh").textContent = new Set(VIDEOS.map(v=>v.m+"|"+v.th)).size;
+render();
+</script>
+</body>
+</html>
